@@ -1,5 +1,5 @@
 
-# Flashcard App
+# Flashcard Website
 
 The app has a collection of flashcard decks of different categories. Users can create and share their own decks. They can also search decks made by others.
 
