@@ -25,9 +25,10 @@ CREATE TABLE cards (
 
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
-  card_id INTEGER REFERENCES cards,
+  deck_id INTEGER REFERENCES decks,
   user_id INTEGER REFERENCES users,
-  review TEXT NOT NULL
+  comment TEXT NOT NULL,
+  rating INTEGER NOT NULL
 );
 
 CREATE TABLE favourites (
