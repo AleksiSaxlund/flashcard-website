@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div>
+        <h1>Flashcard Website</h1>
+        <p>Welcome to the Flashcard Website!<br></p>
+        <p>Don't have an account? Create an account here:
+            <a href="/register" class="linkstyle">Register</a>
+        </p>
+        <p>Back to the frontpage: 
+            <a href="/" class="linkstyle">Frontpage</a>
+        </p>
+    </div>
+    <div>
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>

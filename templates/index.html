@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Flashcard Website</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>Flashcard Website</h1>
+        <p>Welcome to the Flashcard Website!<br></p>
+        {% if not logged_in %}
+        <a href="/login" class="linkstyle">Login</a>
+        <a href="/register" class="linkstyle">Register</a>
+        {% else %}
+        <p>You are logged in</p>
+        <a href="/logout" class="linkstyle">Logout</a>
+        {% endif %}
+    </div>
+
+    <div>
+        <div>
+        <h2>Decks</h2>
+            <form action="/search" method="post">
+                <input type="text" name="search" placeholder="Search for decks">
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    {% for category in categories %}
+                    <option value={{category}}>{{category}}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="deckgrid-container">
+            {% for deck in decks %}
+            <div class="deckcontainer">
+                <p class="deckiconstyle">{{deck[0]}}</p>
+                <p>{{deck[1]}}</p>
+                <a href="/deck/{{deck.id}}" class=linkstyle>Play!</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>

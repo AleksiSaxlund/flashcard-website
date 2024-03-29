@@ -1,0 +1,36 @@
+.linkstyle {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 2px 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    color: rgb(4, 2, 57);
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.deckgrid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 220px);
+    padding: 10px;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.deckcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.deckiconstyle {
+    font-size: 100px;
+    margin: auto;
+}
