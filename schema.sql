@@ -13,7 +13,8 @@ CREATE TABLE decks (
   id SERIAL PRIMARY KEY,
   deck_name VARCHAR(255) NOT NULL,
   category_id INTEGER REFERENCES categories,
-  user_id INTEGER REFERENCES users
+  user_id INTEGER REFERENCES users,
+  visible BOOLEAN NOT NULL
 );
 
 CREATE TABLE cards (
@@ -34,5 +35,6 @@ CREATE TABLE reviews (
 CREATE TABLE favourites (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users,
-  deck_id INTEGER REFERENCES decks
+  deck_id INTEGER REFERENCES decks,
+  visible BOOLEAN NOT NULL
 );
