@@ -20,17 +20,55 @@
     </div>
     <div>
         <h2>Register</h2>
-        <form action="/register" method="post">
+        <form action="/register/check" method="post" onsubmit="return formValidator()">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
             <label for="password2">Confirm Password:</label>
-            <input type="password" id="password2" name="password2" required><br>
+            <input type="password" id="password_check" name="password_check" required><br>
             <input type="submit" value="Register">
         </form>
     </div>
+    
+    <script>
+        function formValidator() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var password_check = document.getElementById("password_check").value;
+            
+            if (username.length < 4) {
+                alert("Username must be at least 4 characters long");
+                return false;
+            }
 
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long");
+                return false;
+            }
 
+            if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
+                alert("Password must contain both uppercase and lowercase letters");
+                return false;
+            }
+
+            if (!/\d/.test(password)) {
+                alert("Password must contain at least one number");
+                return false;
+            }
+
+            if (!/[!@#$%^&*]/.test(password)) {
+                alert("Password must contain at least one special character");
+                return False
+            }
+
+            if (password !== password_check) {
+                alert("Password and Confirm Password must match");
+                return false;
+            }
+
+            return true;
+            }
+    </script>
 
 </body>
