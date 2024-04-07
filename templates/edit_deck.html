@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Edit {{deck[1]}}</title>
+</head>
+
+<body>
+    <div>
+        <h1>Edit {{deck[1]}}</h1>
+    </div>  
+
+    <div>
+        <a href="/deck/{{deck[0]}}">Back to deck</a>
+        <form action="/deck/{{deck[0]}}/edit/submit_card" method="POST">
+            <input type="hidden" name="deck_id" value="{{deck[0]}}">
+            <input type="hidden" name="new_card" value={{True}}>
+            <label for="front">Front:</label><br>
+            <input type="text" id="front" name="front"><br>
+            <label for="back">Back:</label><br>
+            <input type="text" id="back" name="back"><br>
+            <button type="submit">Add card</button>
+        </form>
+        <form action="/deck/{{deck[0]}}/edit/delete" method="POST" onsubmit="return deleteValidator()">
+            <button type="submit">Delete deck</button>
+        </form>
+    </div>
+    <div>
+        <h2>All cards</h2>
+        <ul>
+            {% for card in cards %}
+            <li>
+                <h3>{{card[1]}}</h3>
+                <a href="/deck/{{deck[0]}}/edit/{{card[0]}}">Edit</a>
+                <form action="/deck/{{deck[0]}}/edit/{{card[0]}}/delete" method="POST" onsubmit="return deleteValidator()">
+                    <button type="submit">Delete card</button>
+                </form>
+            </li>
+            {% endfor %}
+    </div>
+
+    <script src="/static/js/deleteValidator.js"></script>
+
+</body>

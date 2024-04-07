@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Create a new deck</title>
+</head>
+
+<body>
+    <div>
+        <h1>Create a new deck</h1>
+        <form action="/create_deck/submit" method="post">
+            <label for="deckname">Deck name:</label>
+            <input type="text" id="deckname" name="deckname" required><br>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                {% for category in categories %}
+                <option value={{category[0]}}>{{category[1]}}</option>
+                {% endfor %}
+            </select><br>
+            <input type="submit" value="Create deck">
+        </form>
+        
+    </div>
+
+</body>

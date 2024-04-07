@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Edit card</title>
+</head>
+
+<body>
+    <div>
+        <h1>Edit card</h1>
+
+        <form action="/deck/{{deck_id}}/edit/submit_card" method="post">
+            <input type="hidden" name="card_id" value="{{card_id}}">
+            <input type="hidden" name="new_card" value={{False}}>
+            <label for="front">Front:</label><br>
+            <input type="text" id="front" name="front" value="{{front}}"><br>
+            <label for="back">Back:</label><br>
+            <input type="text" id="back" name="back" value="{{back}}"><br>
+            <input type="submit" value="Submit">
+        
+    </div>
+
+</body>

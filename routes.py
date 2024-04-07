@@ -10,6 +10,7 @@ hardocded_reviews = [{"username": "asd", "rating": "12", "comment": "hyva on"}, 
 
 @route.route("/")
 def index():
+    print(session)
     try:
         log = session["username"]
     except:
@@ -70,5 +71,44 @@ def edit_deck(deck_id):
 
 @route.route("/deck/<int:deck_id>/edit/<int:card_id>")
 def edit_card(deck_id, card_id):
-    card = ("Front", "Back")
-    return render_template("edit_card.html", front=card[0], back=card[1])
+    card = decks_repository.get_card(card_id)
+    return render_template("edit_card.html", card_id = card[0], front=card[1], back=card[2], deck_id=card[3])
+
+@route.route("/deck/<int:deck_id>/edit/submit_card", methods=["POST"])
+def submit_card(deck_id):
+    new = request.form["new_card"]
+    front = request.form["front"]
+    back = request.form["back"]
+    print(new)
+    if new == True:
+        decks_repository.create_card(deck_id, front, back)
+    else:
+        card_id = request.form["card_id"]
+        decks_repository.edit_card(card_id, front, back)
+    return redirect(f"/deck/{deck_id}/edit")
+
+@route.route("/deck/<int:deck_id>/edit/delete", methods=["POST"])
+def delete_deck(deck_id):
+    deck = decks_repository.get_deck(deck_id)
+    if deck[3] != session.get("user_id"):
+        return redirect("/")
+    decks_repository.delete_deck(deck_id)
+    return redirect("/")
+
+@route.route("/deck/<int:deck_id>/edit/<int:card_id>/delete", methods=["POST"])
+def delete_card(deck_id, card_id):
+    decks_repository.delete_card(card_id)
+    return redirect(f"/deck/{deck_id}/edit")
+
+@route.route("/create_deck")
+def create_deck():
+    categories = decks_repository.get_categories()
+    return render_template("create_deck.html", categories=categories)
+
+@route.route("/create_deck/submit", methods=["POST"])
+def create_deck_create():
+    name = request.form["deckname"]
+    category = request.form["category"]
+    user_id = session["user_id"]
+    decks_repository.create_deck(name, category, user_id)
+    return redirect("/")
