@@ -10,20 +10,22 @@
 <body>
     <div>
         <h1>{{deck[1]}}</h1>
-        <a href="/deck/{{deck[2]}}/play" class="linkstyle">Play</a>
+        <a href="/deck/{{deck[0]}}/play" class="linkstyle">Play</a>
+        <a href="/" class="linkstyle">Frontpage</a>
         {% if is_owner %}
-        <a href="/deck/{{deck[2]}}/edit" class="linkstyle">Edit</a>
-        <a href="/deck/{{deck[2]}}/delete" class="linkstyle">Delete</a>
+        <a href="/deck/{{deck[0]}}/edit" class="linkstyle">Edit</a>
+        <a href="/deck/{{deck[0]}}/delete" class="linkstyle">Delete</a>
         {% endif %}
     </div>
 
     <div>
         <h2>Reviews</h2>
         <table>
-        {% for review in reviews %}     
-            <tr><td>{{review["username"]}}</td></tr>
-            <tr><td>{{review["rating"]}}</td></tr>
-            <tr><td>{{review["comment"]}}</td></tr>
+        {% for review in reviews %}  
+            <tr><td>Username: {{review["username"]}}</td></tr>
+            <tr><td>Rating: {{review["rating"]}}</td></tr>
+            <tr><td>Comment: {{review["comment"]}}</td></tr>
+            <p></p>
         {% endfor %}
         </table>
         

@@ -30,7 +30,7 @@
                 <label for="category">Category:</label>
                 <select id="category" name="category">
                     {% for category in categories %}
-                    <option value={{category}}>{{category}}</option>
+                    <option value={{category}}>{{category[1]}}</option>
                     {% endfor %}
                 </select>
                 <input type="submit" value="Search">
@@ -39,9 +39,9 @@
         <div class="deckgrid-container">
             {% for deck in decks %}
             <div class="deckcontainer">
-                <p class="deckiconstyle">{{deck[0]}}</p>
+                <p class="deckiconstyle">{{deck[2]}}</p>
                 <p>{{deck[1]}}</p>
-                <a href="/deck/{{deck[2]}}" class=linkstyle>Play!</a>
+                <a href="/deck/{{deck[0]}}" class=linkstyle>Play!</a>
             </div>
             {% endfor %}
         </div>

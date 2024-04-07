@@ -9,7 +9,7 @@ class UserInputError(Exception):
 
 
 def login(username, password):
-    sql = text("SELECT password FROM users WHERE username = :username")
+    sql = text("SELECT password, id FROM users WHERE username = :username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     if user == None:
@@ -17,7 +17,8 @@ def login(username, password):
     if not check_password_hash(user[0], password):
         return False
     
-    session["username"] = username
+    session["username"] = user[1]
+    session["user_id"] = user[0]
     session["csrf_token"] = os.urandom(16).hex()
     return True
 
