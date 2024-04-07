@@ -58,8 +58,10 @@ def register_check():
 @route.route("/deck/<int:deck_id>")
 def deck(deck_id):
     deck = decks_repository.get_deck(deck_id)
+    reviews = decks_repository.get_reviews(deck_id)
     is_owner = deck[3] == session.get("user_id")
-    return render_template("deck.html", deck=deck, reviews=hardocded_reviews, is_owner=is_owner)
+    logged_in = session.get("user_id") != None
+    return render_template("deck.html", deck=deck, reviews=reviews, is_owner=is_owner, logged_in=logged_in)
 
 @route.route("/deck/<int:deck_id>/edit")
 def edit_deck(deck_id):
@@ -79,7 +81,6 @@ def submit_card(deck_id):
     new = request.form["new_card"]
     front = request.form["front"]
     back = request.form["back"]
-    print(new)
     if new == True:
         decks_repository.create_card(deck_id, front, back)
     else:
@@ -127,3 +128,11 @@ def play(deck_id):
             return redirect(f"/deck/{deck_id}")
         card = cards[index]
         return render_template("card.html", deck_id=deck[0], deck_name=deck[1], front=card[1], back=card[2], index=index)
+    
+@route.route("/deck/<int:deck_id>/review", methods=["POST"])
+def create_review(deck_id):
+    user_id = session["user_id"]
+    comment = request.form["comment"]
+    rating = request.form["rating"]
+    decks_repository.create_review(deck_id, user_id, comment, rating)
+    return redirect(f"/deck/{deck_id}")

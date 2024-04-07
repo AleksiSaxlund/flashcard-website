@@ -53,4 +53,12 @@ def get_categories():
     result = db.session.execute(sql)
     return result.fetchall()
 
+def create_review(deck_id, user_id, comment, rating):
+    sql = text("INSERT INTO reviews (deck_id, user_id, comment, rating) VALUES (:deck_id, :user_id, :comment, :rating)")
+    db.session.execute(sql, {"deck_id": deck_id, "user_id": user_id, "comment": comment, "rating": rating})
+    db.session.commit()
 
+def get_reviews(deck_id):
+    sql = text("SELECT (SELECT username FROM users WHERE id = user_id), rating, comment FROM reviews WHERE deck_id = :deck_id")
+    result = db.session.execute(sql, {"deck_id": deck_id})
+    return result.fetchall()

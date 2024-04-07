@@ -18,12 +18,24 @@
     </div>
 
     <div>
+        {% if logged_in %}
+        <div>
+            <h3>Leave a review</h3>
+            <form action="/deck/{{deck[0]}}/review" method="post">
+                <label for="rating">Rating:</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+                <label for="comment">Comment:</label>
+                <input type="text" id="comment" name="comment" required>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        {% endif %}
         <h2>Reviews</h2>
         <table>
         {% for review in reviews %}  
-            <tr><td>Username: {{review["username"]}}</td></tr>
-            <tr><td>Rating: {{review["rating"]}}</td></tr>
-            <tr><td>Comment: {{review["comment"]}}</td></tr>
+            <tr><td>Username: {{review[0]}}</td></tr>
+            <tr><td>Rating: {{review[1]}}</td></tr>
+            <tr><td>Comment: {{review[2]}}</td></tr>
             <p></p>
         {% endfor %}
         </table>
