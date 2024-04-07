@@ -39,3 +39,8 @@ CREATE TABLE favourites (
   deck_id INTEGER REFERENCES decks,
   visible BOOLEAN NOT NULL
 );
+
+INSERT INTO categories (category_name) VALUES ('Language');
+INSERT INTO categories (category_name) VALUES ('Geography');
+INSERT INTO categories (category_name) VALUES ('Math');
+INSERT INTO categories (category_name) VALUES ('Chemistry');

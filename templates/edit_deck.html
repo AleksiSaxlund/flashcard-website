@@ -16,7 +16,7 @@
         <a href="/deck/{{deck[0]}}">Back to deck</a>
         <form action="/deck/{{deck[0]}}/edit/submit_card" method="POST">
             <input type="hidden" name="deck_id" value="{{deck[0]}}">
-            <input type="hidden" name="new_card" value={{True}}>
+            <input type="hidden" name="new_card" value=True>
             <label for="front">Front:</label><br>
             <input type="text" id="front" name="front"><br>
             <label for="back">Back:</label><br>

@@ -79,12 +79,18 @@ def edit_card(deck_id, card_id):
 @route.route("/deck/<int:deck_id>/edit/submit_card", methods=["POST"])
 def submit_card(deck_id):
     new = request.form["new_card"]
+    print(new)
     front = request.form["front"]
+    print(front)
     back = request.form["back"]
-    if new == True:
+    print(back)
+    if new == "True":
+        print("new=treu ")
         decks_repository.create_card(deck_id, front, back)
-    else:
+    elif new == "False":
+        print("new = false")
         card_id = request.form["card_id"]
+        print(card_id)
         decks_repository.edit_card(card_id, front, back)
     return redirect(f"/deck/{deck_id}/edit")
 
