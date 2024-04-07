@@ -6,12 +6,13 @@
 This excepts that decently up-to-date versions Poetry, PostgreSQL and Python are already installed on the machine. 
 
 ### First time setup
-1. Run the command *poetry install on the terminal in the root folder
+1. Run the command *poetry install* on the terminal in the root folder
 2. Run the command *poetry shell* on the terminal in the root folder
 3. Create a `.env`-file which has the following arguments:
     1. DATABASE_URL=*your database url*
     2. SECRET_KEY=*your secret key*
 4. Run the `init_database.py` script to initialize the database.
+    - If the script does not work on your computer, you will have to manually load `schema.sql` into your database.
 
 ### Running the app
 
@@ -34,3 +35,5 @@ This excepts that decently up-to-date versions Poetry, PostgreSQL and Python are
 The user interface is not done. Many parts have just the basic elements to get the base functionality.
 
 There is no defence for SQL injections or vulnerabilities and the security might be lacking otherwise too.
+
+Please report any bugs you find. :)
