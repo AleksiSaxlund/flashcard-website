@@ -21,7 +21,8 @@ CREATE TABLE cards (
   id SERIAL PRIMARY KEY,
   front TEXT NOT NULL,
   back TEXT NOT NULL,
-  deck_id INTEGER REFERENCES decks
+  deck_id INTEGER REFERENCES decks,
+  visible BOOLEAN NOT NULL
 );
 
 CREATE TABLE reviews (
