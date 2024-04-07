@@ -112,3 +112,18 @@ def create_deck_create():
     user_id = session["user_id"]
     decks_repository.create_deck(name, category, user_id)
     return redirect("/")
+
+@route.route("/deck/<int:deck_id>/play", methods=["GET", "POST"])
+def play(deck_id):
+    deck = decks_repository.get_deck(deck_id)
+    cards = decks_repository.get_cards(deck_id)
+    if request.method == "GET":
+        card = cards[0]
+        return render_template("card.html", deck_id=deck[0], deck_name=deck[1], front=card[1], back=card[2], index=0)
+    else:
+        index = int(request.form["index"]) + 1
+        print(index)
+        if index == len(cards):
+            return redirect(f"/deck/{deck_id}")
+        card = cards[index]
+        return render_template("card.html", deck_id=deck[0], deck_name=deck[1], front=card[1], back=card[2], index=index)

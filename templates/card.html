@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
-    <title>Play </title>
+    <title>Play {{deck_name}}</title>
 </head>
 
 <body>
     <div>
-        
-    
+        <h1>{{front}}</h1>
+        <button onclick="showCardBack()" class="linkstyle">Show back</button>
+        <div id="mask" style="visibility: hidden;">
+            <p>{{back}}</p>
+
+            <form action="/deck/{{deck_id}}/play" method="post">
+                <input type="hidden" name="index" value="{{index}}">
+                <input type="submit" value="Next card">
+            </form>
+        </div>
+        <a href="/deck/{{deck_id}}" class="linkstyle">Back to deck</a>
     </div>
+
+    <script src="/static/js/showCardBack.js"></script>
+
 </body>
