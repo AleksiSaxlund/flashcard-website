@@ -5,7 +5,7 @@
 
 This excepts that decently up-to-date versions Poetry, PostgreSQL and Python are already installed on the machine.
 
-The app has been tested on my own ubuntu mahcine and on fuksiläppäri.
+The app has been tested on my own ubuntu machine and on fuksiläppäri.
 
 ### First time setup
 1. Run the command *poetry install* on the terminal in the root folder
