@@ -3,7 +3,7 @@
 
 ## Usage guide
 
-This excepts that decently up-to-date versions Poetry, PostgreSQL and Python are already installed on the machine.
+This expects that decently up-to-date versions of Poetry, PostgreSQL and Python are already installed on the machine.
 
 The app has been tested on my own ubuntu machine and on fuksiläppäri.
 
