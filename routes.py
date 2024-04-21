@@ -45,8 +45,6 @@ def register():
 
 @route.route("/register/check", methods=["POST"])
 def register_check():
-    if session["csrf_token"] != request.form["csrf_token"]:
-       abort(403)
     username = request.form["username"]
     password = request.form["password"]
     password_check = request.form["password_check"]
