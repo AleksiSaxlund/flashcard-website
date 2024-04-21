@@ -3,6 +3,7 @@ from db import db
 from sqlalchemy.sql import text
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
+from secrets import token_hex
 
 class UserInputError(Exception):
     pass
@@ -16,11 +17,10 @@ def login(username, password):
         return False
     if not check_password_hash(user[2], password):
         return False
-    print(user)
     
     session["username"] = user[1]
     session["user_id"] = user[0]
-    session["csrf_token"] = os.urandom(16).hex()
+    session["csrf_token"] = token_hex(16)
     return True
 
 def logout():

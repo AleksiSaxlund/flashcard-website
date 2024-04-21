@@ -19,8 +19,8 @@
             <label for="back">Back:</label><br>
             <input type="text" id="back" name="back" value="{{back}}"><br>
             <input type="submit" value="Submit">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
-        
     </div>
 
 </body>

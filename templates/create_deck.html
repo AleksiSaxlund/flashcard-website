@@ -20,6 +20,7 @@
                 {% endfor %}
             </select><br>
             <input type="submit" value="Create deck">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
         
     </div>

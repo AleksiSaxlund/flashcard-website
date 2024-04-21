@@ -10,7 +10,9 @@
 <body>
     <div>
         <h1>{{deck[1]}}</h1>
+        {% if lenght > 0 %}
         <a href="/deck/{{deck[0]}}/play" class="linkstyle">Play</a>
+        {% endif %}
         <a href="/" class="linkstyle">Frontpage</a>
         {% if is_owner %}
         <a href="/deck/{{deck[0]}}/edit" class="linkstyle">Edit</a>
@@ -27,6 +29,7 @@
                 <label for="comment">Comment:</label>
                 <input type="text" id="comment" name="comment" required>
                 <input type="submit" value="Submit">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             </form>
         </div>
         {% endif %}

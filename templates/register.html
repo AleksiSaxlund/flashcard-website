@@ -28,6 +28,7 @@
             <label for="password2">Confirm Password:</label>
             <input type="password" id="password_check" name="password_check" required><br>
             <input type="submit" value="Register">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     </div>
 

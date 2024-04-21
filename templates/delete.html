@@ -15,5 +15,6 @@
     <div>
         <form action="/deck/delete" method="post">
             <input type="submit" value="Delete">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     </div>

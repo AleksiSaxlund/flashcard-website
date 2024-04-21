@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, redirect, request, session
+from flask import render_template, Blueprint, redirect, request, session, abort
 from random import choice
 import users
 import decks_repository
@@ -45,6 +45,8 @@ def register():
 
 @route.route("/register/check", methods=["POST"])
 def register_check():
+    if session["csrf_token"] != request.form["csrf_token"]:
+       abort(403)
     username = request.form["username"]
     password = request.form["password"]
     password_check = request.form["password_check"]
@@ -58,10 +60,11 @@ def register_check():
 @route.route("/deck/<int:deck_id>")
 def deck(deck_id):
     deck = decks_repository.get_deck(deck_id)
+    lenght = len(decks_repository.get_cards(deck_id))
     reviews = decks_repository.get_reviews(deck_id)
     is_owner = deck[3] == session.get("user_id")
     logged_in = session.get("user_id") != None
-    return render_template("deck.html", deck=deck, reviews=reviews, is_owner=is_owner, logged_in=logged_in)
+    return render_template("deck.html", deck=deck, reviews=reviews, is_owner=is_owner, logged_in=logged_in, lenght=lenght)
 
 @route.route("/deck/<int:deck_id>/edit")
 def edit_deck(deck_id):
@@ -78,24 +81,25 @@ def edit_card(deck_id, card_id):
 
 @route.route("/deck/<int:deck_id>/edit/submit_card", methods=["POST"])
 def submit_card(deck_id):
+    print(request.form)
+    if session["csrf_token"] != request.form["csrf_token"]:
+       abort(403)
     new = request.form["new_card"]
     print(new)
     front = request.form["front"]
     print(front)
     back = request.form["back"]
-    print(back)
-    if new == "True":
-        print("new=treu ")
+    if new == 'True':
         decks_repository.create_card(deck_id, front, back)
-    elif new == "False":
-        print("new = false")
+    else:
         card_id = request.form["card_id"]
-        print(card_id)
         decks_repository.edit_card(card_id, front, back)
     return redirect(f"/deck/{deck_id}/edit")
 
 @route.route("/deck/<int:deck_id>/edit/delete", methods=["POST"])
 def delete_deck(deck_id):
+    if session["csrf_token"] != request.form["csrf_token"]:
+       abort(403)
     deck = decks_repository.get_deck(deck_id)
     if deck[3] != session.get("user_id"):
         return redirect("/")
@@ -104,6 +108,8 @@ def delete_deck(deck_id):
 
 @route.route("/deck/<int:deck_id>/edit/<int:card_id>/delete", methods=["POST"])
 def delete_card(deck_id, card_id):
+    if session["csrf_token"] != request.form["csrf_token"]:
+       abort(403)
     decks_repository.delete_card(card_id)
     return redirect(f"/deck/{deck_id}/edit")
 
@@ -114,6 +120,8 @@ def create_deck():
 
 @route.route("/create_deck/submit", methods=["POST"])
 def create_deck_create():
+    if session["csrf_token"] != request.form["csrf_token"]:
+       abort(403)
     name = request.form["deckname"]
     category = request.form["category"]
     user_id = session["user_id"]
@@ -137,6 +145,8 @@ def play(deck_id):
     
 @route.route("/deck/<int:deck_id>/review", methods=["POST"])
 def create_review(deck_id):
+    if session["csrf_token"] != request.form["csrf_token"]:
+       abort(403)
     user_id = session["user_id"]
     comment = request.form["comment"]
     rating = request.form["rating"]
